@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* active */
+
+.active {
+    @apply text-green
+}
+
+.active svg {
+    @apply text-green
+}
+
+/* bar de scroll */
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-green_top;
+    border-radius: 5px;
+}
+
+/*album card */
+
+.card-sh {
+    box-shadow: 0 14px 28px  rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    height: 220px;
+}
+
+.ReactCollapse--collapse {
+    transition: height 800ms;
+
+}

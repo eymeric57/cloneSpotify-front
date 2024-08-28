@@ -1,0 +1,82 @@
+import React from 'react'
+import { ALBUM_URL } from '../constants/apiConstant'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { playPause, setActiveAlbum, setActiveSong } from '../redux/player/playerSlice'
+import PlayPause from './PlayPause'
+
+const AlbumCard = ({data, index, songs, isPlaying, activeSong}) => {
+
+    const dispatch = useDispatch();
+  
+
+    //constante pour récupéré l'image de l'album 
+    const imgPath = `${ALBUM_URL}/${data.imagePath}`
+    //on redefini des const pour les données de l'album
+    const artistName = data?.artist?.name ?? "Artiste inconnu"
+    const albumName = data?.title ?? "Album inconnu"
+    const albumId = data?.id ?? '0'
+
+
+    //Méthode lorsque l'on met en pause la chanson
+    const handlePauseClick = () => {
+        dispatch(playPause(false))
+        
+    }
+   
+    
+
+    // Méthode lorsque l'on met en play 
+    const handlePlayClick = (index) => {
+        dispatch(setActiveSong({songs, data,index}))
+        dispatch(setActiveAlbum({data}))
+        dispatch(playPause(true))
+    }
+
+    
+  return (
+
+    <div className='flex flex-col w-[250px] p-4 bg-white01 hover:bg-white05 transition-all ease-out duration-500 animate-slideup rounded-lg cursor-pointer group'>
+        <div className='relative w-full flex flex-col'>
+            <Link to={`/detail/${albumId}`}> 
+            <img 
+            src={imgPath} 
+            alt={`Image de l'album ${albumName}`} 
+            className='card-sh rounded-lg object-cover h-52 w-52'
+            />
+            
+            </Link>
+            <div className={`absolute ${activeSong?.title === songs[index]?.title ? 'flex' : 'hidden'} group-hover:flex right-3 bottom-5`}>
+                <div className='group-hover:animate-slideup2 bg-black outline-none rounded-full group-hover:duration-75 overflow-hidden'>
+                    <PlayPause
+                    songs={songs}
+                    handlePause={handlePauseClick}
+                    handlePlay={() => handlePlayClick(index)}
+                    activeSong={activeSong}
+                    isPlaying={isPlaying}
+                    index={index}
+                    data={data}
+                    />
+                </div>
+            </div>
+            <Link to={`/detail/${albumId}`}> 
+            <div className='mt-4 flex flex-col'>
+                <p className='text-white text-xl font-bold truncate'>
+                    {albumName}
+                </p>
+                <p className='text-white text-sm truncate'>
+                    {artistName}
+                </p>
+            </div>
+            
+            
+            </Link>
+        </div>
+      
+        
+     
+    </div>
+  )
+}
+
+export default AlbumCard
