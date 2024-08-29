@@ -55,7 +55,7 @@ return hours > 0
 
 
   return (
-    <div className='flex items-center'>
+    <div className='flex flex-wrap items-center'>
         <Link to={'#'}>
         <img src={imgPath} 
         alt={`image d el'artiste${dataAlbum?.artist?.name}?? Artiste inconnu` } 
@@ -65,6 +65,7 @@ return hours > 0
         <Dot />
         <p className='font-bold text-base p-1'>{releaseDate}</p>
         <Dot />
+        
         <p className='font-bold text-base p-1'>{nbTitle()}</p>
         <Dot />
         <p className='font-bold text-base p-1'>{dataAlbum?.songs?.length > 0 ?durationAlbum() : 'pas de titre'}</p>

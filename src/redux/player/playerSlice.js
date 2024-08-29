@@ -14,16 +14,6 @@ const playerSlice = createSlice({
   name: "player",
   initialState,
   reducers: {
-    setActiveSong: (state, action) => {
-      //stockage de la chanson en lecture dans activesong
-      state.activeSong = action.payload?.songs[action.payload?.index];
-
-      state.currentSong = action.payload?.songs;
-
-      state.currentIndex = action.payload?.index;
-
-      state.isActive = true;
-    },
     // tout ce qu'on stack lorsqu'on active une chanson
     setActiveSong: (state, action) => {
       state.activeSong = action.payload?.songs[action.payload?.index];

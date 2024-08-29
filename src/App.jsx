@@ -8,6 +8,8 @@ import { useAuthContext } from "./contexts/AuthContext";
 import { checkUser } from "./services/userService";
 import SideBar from "./components/SideBar";
 import Topbar from "./components/Topbar";
+import MusicPlayer from "./components/MusicPlayer";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const userInfo = JSON.parse(localStorage.getItem(USER_INFOS));
@@ -16,6 +18,9 @@ const App = () => {
 
   //methode qui check si c'est le bon user sinon ont deconecte le user
   const navigate = useNavigate();
+
+  //on récupére activ song depuis le slice 
+  const {activeSong} = useSelector(state => state.player)
 
   const fetchUser = async () => {
     const user = await checkUser(userInfo);
@@ -42,9 +47,15 @@ const App = () => {
         </div>
       </div>
       </div>
+    
       {/*TODO:ici la player*/}
+      {activeSong?.title && (
+        <div className="absolute h-28 bottom-0 left-0 right-0 animate-slideup bg-gradient-to-br from-white01 to-black backdrop-blur-lg rounded-t-3xl z-10">
+          <MusicPlayer />
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
 export default App;

@@ -12,7 +12,7 @@ const PlayPause = ({
 }) => {
   return (
     //on checked si ont est en mode play et si le titre en cours d electure (activeSong) corespond au titre de la chanson dans le tableau(songs)l'index donné (index)
-    isPlaying && activeSong?.title === songs[index]?.title 
+    isPlaying && activeSong && songs && activeSong?.title === songs[index].title 
     ?
     //si vrai : ont retourne l'icone pause avec la méthode handlePause
     <BsPauseCircleFill
