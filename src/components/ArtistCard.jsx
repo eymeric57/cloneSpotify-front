@@ -12,7 +12,7 @@ const ArtistCard = ({ dataArtist }) => {
   const name = dataArtist?.name ?? "Artiste inconnu";
 
   return (
-    <Link to={"#"}>
+    <Link to={`/artist-detail/${artistId}`}>
       <div className="flex flex-col justify-center items-center bg-white01 rounded-lg shadow-lg p-4">
         <div className="flex flex-col justify-center items-center">
           <img

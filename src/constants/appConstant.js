@@ -17,9 +17,8 @@ export const dataAlbumNav = [
 //2 pour les options utilisateur
 export const dataUserNav = [
     {title:'Créer un playlist', path:'/add-playlist', icon: AiOutlineAppstoreAdd},
-    {title:'Titres likés', path:'/wishlist', icon: MdFavoriteBorder},
-    {title:'Mon compte', path:'/', icon: FiSettings},//TODO: prevoir la route
-];
+    {title:'Titres likés', path:'/wishList', icon: MdFavoriteBorder},
+    {title:'Mon compte', path:'/account/:id', icon: FiSettings},]
 
 //on récupére le chemon de notre logo 
 export const imgLogo = `${IMAGE_URL}/logo.png`

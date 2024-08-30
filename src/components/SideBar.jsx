@@ -38,7 +38,7 @@ const SideBar = () => {
           />
           <NavLinks marginTop={"mt-10"} array={dataAlbumNav} />
 
-          <NavLinks marginTop={"mt-5"} array={dataUserNav} />
+          <NavLinks marginTop={"mt-5"} userId={userId}   array={dataUserNav} />
         </div>
         {/*ajout bouton de déconnexion */}
         <div className="mt-5">
@@ -89,7 +89,7 @@ const SideBar = () => {
           />
           <NavLinks marginTop={"mt-10"} array={dataAlbumNav} handleClick={() => setMobileMenu(false)} />
 
-          <NavLinks marginTop={"mt-5"} array={dataUserNav}  handleClick={() => setMobileMenu(false)} />
+          <NavLinks marginTop={"mt-5"} array={dataUserNav} userId={userId}  handleClick={() => setMobileMenu(false)} />
         </div>
         <div className="mt-5">
           <button

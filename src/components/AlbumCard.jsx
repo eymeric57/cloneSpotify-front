@@ -5,15 +5,14 @@ import { useDispatch } from 'react-redux'
 import { playPause, setActiveAlbum, setActiveSong } from '../redux/player/playerSlice'
 import PlayPause from './PlayPause'
 
-const AlbumCard = ({data, index, songs, isPlaying, activeSong}) => {
+const AlbumCard = ({data, index, songs, isPlaying, activeSong, artist='inconnu'}) => {
 
     const dispatch = useDispatch();
   
-
     //constante pour récupéré l'image de l'album 
     const imgPath = `${ALBUM_URL}/${data.imagePath}`
     //on redefini des const pour les données de l'album
-    const artistName = data?.artist?.name ?? "Artiste inconnu"
+    const artistName = data?.artist?.name ?? artist
     const albumName = data?.title ?? "Album inconnu"
     const albumId = data?.id ?? '0'
 
@@ -24,8 +23,6 @@ const AlbumCard = ({data, index, songs, isPlaying, activeSong}) => {
         
     }
    
-    
-
     // Méthode lorsque l'on met en play 
     const handlePlayClick = (index) => {
         dispatch(setActiveSong({songs, data,index}))

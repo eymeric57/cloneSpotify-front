@@ -56,7 +56,7 @@ return hours > 0
 
   return (
     <div className='flex flex-wrap items-center'>
-        <Link to={'#'}>
+        <Link to={`/artist-detail/${dataAlbum?.artist?.id}`}>
         <img src={imgPath} 
         alt={`image d el'artiste${dataAlbum?.artist?.name}?? Artiste inconnu` } 
         className='w-10 h-10 rounded-full object-cover mr-3 border-solid border-2 border-white' />
