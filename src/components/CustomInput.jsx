@@ -1,6 +1,8 @@
 import React from 'react'
 
 const CustomInput = ({state, label , type, callable}) => {
+
+ 
   return (
     <div className='mb-3'>
         <label 

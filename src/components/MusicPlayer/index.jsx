@@ -38,7 +38,7 @@ const MusicPlayer = () => {
   const handleNextSong = () => {
     //si ont est pas en mode aléatoire 
     if(!shuffle){
-      dispatch(nextSong(currentIndex + 1) % currentSong.length);
+      dispatch(nextSong((currentIndex + 1) % currentSong.length));
     }else {
       //si on est en mode aleatoire
       dispatch(nextSong(Math.floor(Math.random() * currentSong.length)));
