@@ -6,16 +6,14 @@ import SearchView from '../../components/Search/SearchView'
 import PageLoader from '../../components/Loader/PageLoader'
 
 const Search = () => {
-  const {loading} = useSelector(selectAlbumsData)
+  //on récupère le state loading depuis le slice pour gérer le loader
+  const { loading } = useSelector(selectAlbumsData);
+
   return (
     <>
-   <SearchBar/> 
-   {loading ? <PageLoader/> : <SearchView/>}
-
-
+      <SearchBar />
+      {loading ? <PageLoader /> : <SearchView />}
     </>
-    
-   
   )
 }
 

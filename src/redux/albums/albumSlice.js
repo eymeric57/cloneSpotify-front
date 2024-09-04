@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { API_URL } from "../../constants/apiConstant";
 import axios from "axios";
+import { API_URL } from "../../constants/apiConstant";
 
 const albumSlice = createSlice({
   //on lui donne un nom
@@ -8,11 +8,11 @@ const albumSlice = createSlice({
   //on initialise les valeurs par defaut
   initialState: {
     loading: false, // un flag pour gerer l'attente des requetes
-    albums: [], // un compartiment de rayon pour stocker la liste des albums
-    albumDetail: {}, // un compartiment de rayon pour stocker les details d'un album
-    searchAlbum: [], // un compartiment de rayon pour stocker les resultat de recherche sur ablums
-    searchArtist: [],// un compartiment de rayon pour stocker les resultat de recherche sur artist
-    searchTitle: [],// un compartiment de rayon pour stocker les resultat de recherche sur titre
+    albums: [], // un compartiment de rayon pour stocker la liste de tous les albums
+    albumDetail: {}, // un compartiment de rayon pour stocker les détails d'un album
+    searchAlbum: [], // un compartiment de rayon pour stocker les résultats de recherche sur album
+    searchArtist: [], // un compartiment de rayon pour stocker les résultats de recherche sur artiste
+    searchTitle: [], // un compartiment de rayon pour stocker les résultats de recherche sur les titre
   },
   //méthode qui permet de remplir les states
   reducers: {
@@ -34,84 +34,69 @@ const albumSlice = createSlice({
     setSearchTitle: (state, action) => {
       state.searchTitle = action.payload;
     },
-  },
+  }
 });
 
-export const { setLoading, setAlbums, setAlbumDetail, setSearchAlbum, setSearchArtist, setSearchTitle } =
-  albumSlice.actions;
+export const { setLoading, setAlbums, setAlbumDetail, setSearchAlbum, setSearchArtist, setSearchTitle } = albumSlice.actions;
 
-//on crée les methodes qui permettront de récupéréer les données dans la bdd
-
-export const fetchAlbums = () => async (dispatch) => {
+//on crée les méthodes qui permettront de récupérer les données dans la bdd
+export const fetchAlbums = () => async dispatch => {
   try {
-    //on va passer le loading a true
+    //on va passer le loading à true
     dispatch(setLoading(true));
-    //on va faire une requete  a l'api
-    const response = await axios.get(`${API_URL}/albums?page=1&isActive=true`);
+    //on va faire une requête à l'api
+    const response = await axios.get(`${API_URL}/albums?page=1&isActive=true`)
     //on va setter les données dans le state
     dispatch(setAlbums(response.data));
-    //on va passer le loading a false
+    //on repasse le loading à false
     dispatch(setLoading(false));
   } catch (error) {
-    console.log(`Erreur lors de la récupération des albums : ${error}`);
+    console.log(`Erreur lors de la récupération des albums: ${error}`);
+    //on repasse le loading à false
     dispatch(setLoading(false));
   }
 };
 
-//recupérer les info d'un album dans la bdd
-export const fetchAlbumDetail = (id) => async (dispatch) => {
+//on crée une méthode qui permet de récuperer les information d'un album dans la bdd
+export const fetchAlbumDetail = (id) => async dispatch => {
   try {
-    //on va passer le loading a true
+    //on passe le loading à true
     dispatch(setLoading(true));
-    //on va faire une requete  a l'api
+    //on fait une requête à l'api
     const response = await axios.get(`${API_URL}/albums/${id}`);
-    //on va setter les données dans le state
+    //on set les données dans le state
     dispatch(setAlbumDetail(response.data));
-    //on va passer le loading a false
+    //on repasse le loading à false
     dispatch(setLoading(false));
   } catch (error) {
-    console.log(
-      `Erreur lors de la récupération des détails de l'album : ${error}`
-    );
+    console.log(`Erreur lors de la récupération des détails de l'album: ${error}`);
+    //on repasse le loading à false
     dispatch(setLoading(false));
   }
-};
+}
 
-export const fetchSearch = (searchWord) => async (dispatch) => {
+//on crée une méthode pour faire une recherche
+export const fetchSearch = (searchWord) => async dispatch => {
   try {
-    //on va passer le loading a true
+    //on passe loading à true
     dispatch(setLoading(true));
-    //on va faire une requete  a l'api
-    const responseAlbums = await axios.get(
-      `${API_URL}/albums?page=1&title=${searchWord}&isActive=true`
-    );
-
-    const responseArtist = await axios.get(
-      `${API_URL}/artists?page=1&name=${searchWord}`
-    );
-
-    const responseTitle = await axios.get(
-      `${API_URL}/albums?page=1&songs.title=${searchWord}&isActive=true`
-    );
-
+    
+    const responseAlbums = await axios.get(`${API_URL}/albums?page=1&title=${searchWord}&isActive=true`);
+    const responseArtist = await axios.get(`${API_URL}/artists?page=1&name=${searchWord}&albums.isActive=true`);
+    const responseTitle = await axios.get(`${API_URL}/albums?page=1&songs.title=${searchWord}&isActive=true`);
 
     dispatch(setSearchAlbum(responseAlbums.data));
     dispatch(setSearchArtist(responseArtist.data));
     dispatch(setSearchTitle(responseTitle.data));
 
-
+    //on repasse loading à false
     dispatch(setLoading(false));
   } catch (error) {
-    console.log(`Erreur lors de la recherche : ${error}`);
+    console.log(`Erreur lors de la recherche: ${error}`);
+    //on repasse loading à false
     dispatch(setLoading(false));
   }
-};
-
-
-
-
-
-
+}
 
 //on export notre reducer
 export default albumSlice.reducer;

@@ -4,14 +4,11 @@ import ToolbarDetail from './ToolbarDetail'
 import ListAlbumSong from './ListAlbumSong'
 
 const DetailAlbum = ({dataAlbum}) => {
-
   return (
     <>
-    <HeaderDetail dataAlbum={dataAlbum}/>
-    <ToolbarDetail dataAlbum={dataAlbum}/>
-    <ListAlbumSong dataAlbum={dataAlbum}/>
-    
-    
+      <HeaderDetail dataAlbum={dataAlbum} />
+      <ToolbarDetail dataAlbum={dataAlbum} />
+      <ListAlbumSong dataAlbum={dataAlbum} />
     </>
   )
 }

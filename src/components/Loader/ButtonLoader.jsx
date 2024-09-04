@@ -1,18 +1,18 @@
 import React from 'react'
-import {Circles } from 'react-loader-spinner'
+import { Audio } from 'react-loader-spinner'
 
-const ButtonLoader = () => {
+const ButtonLoader = ({size = 60}) => {
   return (
-    <Circles
-        height="80"
-        width="80"
-        color="rgba(30,215,96,1)"
-        ariaLabel="circles-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-        />)
-  
+    <Audio
+      height={size}
+      width={size}
+      color="rgba(30, 215, 96,1)"
+      ariaLabel="audio-loading"
+      wrapperStyle={{}}
+      wrapperClass="wrapper-class"
+      visible={true}
+    />
+  )
 }
 
 export default ButtonLoader

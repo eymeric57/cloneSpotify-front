@@ -1,20 +1,22 @@
 import React from 'react'
-import { MdDangerous } from 'react-icons/md'
+import { MdDangerous } from 'react-icons/md';
 import { Link, useRouteError } from 'react-router-dom'
 
 const ErrorPage = () => {
 
-  const error = useRouteError()
+  const error = useRouteError();
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen bg-black text-white'>
+    <div className='flex flex-col items-center justify-center h-screen bg-black text-white' >
       <MdDangerous className='text-9xl text-red-600' />
-      <h1>Oops! </h1>
-      <p>Désolé, mais une erreur c'est produite , sans doute la faute de philip ! 
- <i> {error.statusText || error.message} </i>
-
+      <h1>Oops!</h1>
+      <p>Désolé, mais une erreur s'est produite</p>
+      <p>
+        <i>{error.statusText || error.message}</i>
       </p>
-      <Link to='/' className='text-blue-600'>Retourner en lieu sûr</Link>    
+      <Link to='/' className='text-green_06 hover:text-green'>
+        Revenir en lieu sûr
+      </Link>
     </div>
   )
 }
